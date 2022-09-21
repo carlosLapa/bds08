@@ -25,28 +25,29 @@
 }
 
 .search-input {
-    padding: 8px 27px 8px 17px;
-    background-color: #fff;
-    border: 1px solid #d9d9d9;
-    border-radius: 4px;
-    font-size: 16px;
-    text-align: left;
-    height: 40px;
-    width: 300px;
-    margin-top: 12px;
-    margin-bottom: 32px;
-  }
+  padding: 8px 27px 8px 17px;
+  background-color: #fff;
+  border: 1px solid #d9d9d9;
+  border-radius: 4px;
+  font-size: 16px;
+  text-align: left;
+  height: 40px;
+  width: 300px;
+  margin-top: 12px;
+  margin-bottom: 32px;
+}
+
+.search-input::placeholder {
+  color: #bfbfbf;
+}
 
 .form-container {
-    display: flex;
-    flex-direction: column;
-    align-items: left;
-  }
-
-.cep-search-result {
   display: flex;
   flex-direction: column;
   align-items: left;
+}
+
+.cep-search-result {
   padding: 30px 40px;
   background-color: #e6f7ff;
   height: 270px;
