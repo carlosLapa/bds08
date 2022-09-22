@@ -8,7 +8,7 @@ const Loader = () => (
       height={300}
       title="Loading profile..."
     >
-      <rect x="0" y="0" rx="5" ry="5" width="1500" height="300" />
+      <rect x="50" y="20" rx="5" ry="5" width="1500" height="300" />
     </ContentLoader>
   </div>
 );
