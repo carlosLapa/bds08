@@ -1,6 +1,7 @@
 import axios from 'axios';
 import ResultCard from 'components/ResultCard';
 import { useState } from 'react';
+import Loader from './Loader';
 import './styles.css';
 
 type formData = {
@@ -17,6 +18,8 @@ type Profile = {
 };
 
 const CepSearch = () => {
+  const [isLoading, setIsLoading] = useState(false);
+
   const [profile, setProfile] = useState<Profile>();
 
   const [formData, setFormData] = useState<formData>({
@@ -33,15 +36,18 @@ const CepSearch = () => {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
+    setIsLoading(true);
     axios
       .get(`https://api.github.com/users/${formData.gitProfile}`)
       .then((response) => {
         setProfile(response.data);
-        console.log(response.data);
       })
       .catch((error) => {
         setProfile(undefined);
         console.log(error);
+      })
+      .finally(() => {
+        setIsLoading(false);
       });
   };
 
@@ -66,10 +72,11 @@ const CepSearch = () => {
         </form>
       </div>
 
-      {profile && (
+      {profile && ( isLoading ? <Loader /> :
+        (
         <>
           <div className="container cep-search-result">
-            <div className='cep-search-image'>
+            <div className="cep-search-image">
               <img src={profile.avatar_url} alt="Imagem" />
             </div>
             <div className="cep-search-info">
@@ -81,7 +88,7 @@ const CepSearch = () => {
             </div>
           </div>
         </>
-      )}
+      ))}
     </div>
   );
 };
