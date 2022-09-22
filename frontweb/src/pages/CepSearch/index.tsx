@@ -8,12 +8,12 @@ type formData = {
 };
 
 type Profile = {
-  login: string,
-  url: string,
-  avatar_url: string,
-  followers: number,
-  location: string,
-  name: string
+  login: string;
+  url: string;
+  avatar_url: string;
+  followers: string;
+  location: string;
+  name: string;
 };
 
 const CepSearch = () => {
@@ -32,17 +32,17 @@ const CepSearch = () => {
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    
-    axios.get(`https://api.github.com/users/${formData.gitProfile}`)
-    .then((response) => {
-      setProfile(response.data);
-      console.log(response.data);
-    })
-    .catch((error) => {
-      setProfile(undefined);
-      console.log(error);
-    })
 
+    axios
+      .get(`https://api.github.com/users/${formData.gitProfile}`)
+      .then((response) => {
+        setProfile(response.data);
+        console.log(response.data);
+      })
+      .catch((error) => {
+        setProfile(undefined);
+        console.log(error);
+      });
   };
 
   return (
@@ -65,16 +65,23 @@ const CepSearch = () => {
           </div>
         </form>
       </div>
-      <div className="container cep-search-result">
-        <h1>Teste</h1>
-      {profile && (
-          <>
-            <ResultCard title="Perfil" description={profile.url} />
-            <ResultCard title="Nome" description={profile.name} />
-          </>
-        )}
 
-      </div>
+      {profile && (
+        <>
+          <div className="container cep-search-result">
+            <div className='cep-search-image'>
+              <img src={profile.avatar_url} alt="Imagem" />
+            </div>
+            <div className="cep-search-info">
+              <h2>Informações</h2>
+              <ResultCard title="Perfil: " description={profile.url} />
+              <ResultCard title="Seguidores: " description={profile.followers} />
+              <ResultCard title="Localidade: " description={profile.location} />
+              <ResultCard title="Nome: " description={profile.name} />
+            </div>
+          </div>
+        </>
+      )}
     </div>
   );
 };
